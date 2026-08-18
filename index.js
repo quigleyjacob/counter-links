@@ -16,8 +16,9 @@ export function getRegularCounterUrl({
 
     let enemyUnits = getUnits('d', enemySquadData, isFleet)
     let allyUnits = getUnits('a', allySquadData, isFleet)
+    let eventInstanceIdQuery = `season_id=${encodeURIComponent(eventInstanceId)}`
 
-    return `${url}/${leader}?${[...enemyUnits, ...allyUnits].join('&')}`
+    return `${url}/${leader}?${[eventInstanceId, ...enemyUnits, ...allyUnits].join('&')}`
 }
 
 function getUnits(side, squadData, isFleet) {
