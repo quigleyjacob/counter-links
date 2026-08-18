@@ -1,6 +1,6 @@
 {
   "name": "@quigbot/counter-links",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "main": "index.js",
   "type": "module",
   "license": "MIT"
