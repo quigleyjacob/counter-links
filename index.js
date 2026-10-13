@@ -16,7 +16,7 @@ export function getRegularCounterUrl({
 
     let enemyUnits = getUnits('d', enemySquadData, isFleet)
     let allyUnits = getUnits('a', allySquadData, isFleet)
-    let eventInstanceIdQuery = `season_id=${encodeURIComponent(eventInstanceId)}`
+    let eventInstanceIdQuery = eventInstanceId ? `season_id=${encodeURIComponent(eventInstanceId)}` : undefined
 
     return `${url}/${leader}?${[eventInstanceIdQuery, ...enemyUnits, ...allyUnits].join('&')}`
 }
@@ -68,7 +68,7 @@ export function getInsightCounterUrl({
     const allySquadBaseIdList = allySquad.map(u => u.baseId)
 
     const enemySquad = enemySquadData?.squad || []
-    const enemyDatacron = enemyAccount?.datacon?.find(d => d.id === enemySquadData?.datacron)
+    const enemyDatacron = enemyAccount?.datacron?.find(d => d.id === enemySquadData?.datacron)
     const enemySquadBaseIdList = enemySquad.map(u => u.baseId)
 
     const url = "https://swgoh.gg/gac/insight/battles"
@@ -93,7 +93,7 @@ export function getInsightCounterUrl({
         units,
         isFleet
     )
-    const enemyOmicrons = getOmicrons(enemySquad, 'd', enemyAccount, isFleet, squadSize)
+    const enemyOmicrons = getOmicrons(enemySquad, 'd', enemyAccount, isFleet, activeGac.mode)
 
     const allyLeader = getLeader(allySquad, 'a', activeGac)
     const allyMembers = getSquadMembers(allySquad, 'a', isFleet)
@@ -106,7 +106,7 @@ export function getInsightCounterUrl({
         units,
         isFleet
     )
-    const allyOmicrons = getOmicrons(allySquad, 'a', allyAccount, isFleet, squadSize)
+    const allyOmicrons = getOmicrons(allySquad, 'a', allyAccount, isFleet, activeGac.mode)
 
     const excludeExpired = { key: "exclude_expired_datacrons", value: true }
 
